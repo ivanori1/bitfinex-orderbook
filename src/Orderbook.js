@@ -49,13 +49,24 @@ const Orderbook = () => {
 
   // Render the bids and asks
   const renderRows = (data) => {
-    return data.map((item, index) => (
-      <tr key={index}>
-        <td>{item[1]}</td>
-        <td>{Math.abs(item[2])}</td>
-        <td>{item[0]}</td>
-      </tr>
-    ));
+    if(data[0][2] > 0) {
+
+      return data.map((item, index) => (
+        <tr key={index}>
+          <td>{item[1]}</td>
+          <td>{Math.abs(item[2])}</td>
+          <td>{item[0]}</td>
+        </tr>
+      ));
+    } else {
+      return data.map((item, index) => (
+        <tr key={index}>
+          <td>{item[0]}</td>
+          <td>{Math.abs(item[2])}</td>
+          <td>{item[1]}</td>
+        </tr>
+      ));
+    }
   };
 
   return (
@@ -77,9 +88,9 @@ const Orderbook = () => {
         <table className='asks-table'>
           <thead>
             <tr>
-              <th>Count</th>
-              <th>Amount</th>
               <th>Price</th>
+              <th>Amount</th>
+              <th>Count</th>
             </tr>
           </thead>
           <tbody>
