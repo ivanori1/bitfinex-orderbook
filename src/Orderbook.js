@@ -31,7 +31,7 @@ const Orderbook = () => {
 
     socket.addEventListener('message', (message) => {
       const data = JSON.parse(message.data);
-
+      console.log(data)
       if (Array.isArray(data) && data.length === 2) {
         if (data[1] === 'hb') {
           return
@@ -48,8 +48,7 @@ const Orderbook = () => {
   }, [dispatch]);
 
   // Render the bids and asks
-  const renderRows = (data) => {
-    if(data[0][2] > 0) {
+  const renderBids = (data) => {
 
       return data.map((item, index) => (
         <tr key={index}>
@@ -58,7 +57,10 @@ const Orderbook = () => {
           <td>{item[0]}</td>
         </tr>
       ));
-    } else {
+
+    };
+    const renderAsks = (data) => {
+
       return data.map((item, index) => (
         <tr key={index}>
           <td>{item[0]}</td>
@@ -66,8 +68,7 @@ const Orderbook = () => {
           <td>{item[1]}</td>
         </tr>
       ));
-    }
-  };
+      };
 
   return (
     <div >
@@ -82,7 +83,7 @@ const Orderbook = () => {
             </tr>
           </thead>
           <tbody>
-            {renderRows(bids)}
+            {renderBids(bids)}
           </tbody>
         </table>
         <table className='asks-table'>
@@ -94,7 +95,7 @@ const Orderbook = () => {
             </tr>
           </thead>
           <tbody>
-            {renderRows(asks)}
+            {renderAsks(asks)}
           </tbody>
         </table>
       </div>
