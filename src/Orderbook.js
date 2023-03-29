@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateBids, updateAsks } from './redux/orderbookSlice';
-import { w3cwebsocket as W3CWebSocket } from 'websocket';
+import { w3cwebsocket } from 'websocket';
 import './index.css'
 
 const symbol = 'tMXNT:USD'
@@ -13,7 +13,7 @@ const Orderbook = () => {
 
   // Define spread state at the top level of your component
   useEffect(() => {
-    const socket = new W3CWebSocket('wss://api-pub.bitfinex.com/ws/2');
+    const socket = new w3cwebsocket('wss://api-pub.bitfinex.com/ws/2');
 
     socket.addEventListener('open', () => {
       console.log('WebSocket open');
