@@ -12,8 +12,6 @@ const Orderbook = () => {
   const asks = useSelector((state) => state.orderbook.asks);
 
   // Define spread state at the top level of your component
-  const [spread, setSpread] = useState(null);
-
   useEffect(() => {
     const socket = new W3CWebSocket('wss://api-pub.bitfinex.com/ws/2');
 
@@ -99,7 +97,6 @@ const Orderbook = () => {
           </tbody>
         </table>
       </div>
-      {spread && <p>Spread: {spread}</p>}
     </div>
   );
 };
